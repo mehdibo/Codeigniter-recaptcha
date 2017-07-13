@@ -17,8 +17,6 @@ Start by completing the following steps:
 	
 To use this class outside Codeigniter just remove the following line found in the top:
 
-`defined('BASEPATH') OR exit('No direct script access allowed');`
-
  ## Documentation
   ### Loading the library
 Make sure you followed the steps on [Getting Started](#getting-started) first, after that you can simply load the library using:
