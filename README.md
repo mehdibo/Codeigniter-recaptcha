@@ -14,8 +14,6 @@ Start by completing the following steps:
   1. Copy `Recaptcha.php` to the `/application/libraries` folder.
   2. Load the library using the Codeigniter loader `$this->load->library('recaptcha' , $config)`, 
   3. See the [documentation](#documentation) for usage.
-	
-To use this class outside Codeigniter just remove the following line found in the top:
 
  ## Documentation
   ### Loading the library
