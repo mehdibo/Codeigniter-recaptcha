@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Small library to use the Google reCAPTCHA V2 API
  *
  * @author		Mehdi Bounya
- * @link			https://github.com/mehdibo/Codeigniter-blockchain
+ * @link		https://github.com/mehdibo/Codeigniter-recaptcha/
  */
 
 class Recaptcha{
