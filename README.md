@@ -18,7 +18,7 @@ Start by completing the following steps:
  ## Documentation
   ### Loading the library
 Make sure you followed the steps on [Getting Started](#getting-started) first, after that you can simply load the library using:
-`$this->load->library('blockchain' , $config)`
+`$this->load->library('recaptcha' , $config)`
 
 `$config` options are:
   * `$config['site_key']` - Site key provided by Google
