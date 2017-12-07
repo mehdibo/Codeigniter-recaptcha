@@ -85,3 +85,6 @@ Make sure you followed the steps on [Getting Started](#getting-started) first, a
   Set to `FALSE` to not send the IP
   
   Set to `NULL` to get the user's IP automatically
+
+## Contributing 
+All contributions are welcome!
