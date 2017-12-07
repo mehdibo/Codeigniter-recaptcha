@@ -304,7 +304,7 @@ class Recaptcha
          // Close the cURL session
         curl_close($curl);
 
-        // If success return TRUE
+        // Return data
         return $return;
     }
 }
