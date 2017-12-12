@@ -96,12 +96,12 @@ class Recaptcha
         // If a parameter was passed
         if ($config !== NULL) {
              // Check if keys were passed
-            if (empty($config['site_key']) === FALSE && empty($config['secret_key']) === FALSE) {
+            if ( ! empty($config['site_key']) && ! empty($config['secret_key'])) {
                 // Set the keys
                 $this->set_keys($config['site_key'], $config['secret_key']);
             }
 
-            if (empty($config['parameters']) === FALSE) {
+            if ( ! empty($config['parameters'])) {
                 // Pass the parameters
                 $this->set_parameters($config['parameters']);
             }
@@ -187,7 +187,7 @@ class Recaptcha
             $box .= ' class="g-recaptcha"';
         }else{
             // Attributes are passed, check if there is a class attribute
-            if(empty($attr['class']) === TRUE){
+            if( empty($attr['class']) ){
                 // No class attribute was passed
                 // Add the g-recaptcha class
                 $attr['class'] = 'g-recaptcha';
@@ -244,7 +244,7 @@ class Recaptcha
         }
         
         // If an IP was passed add it to post_data
-        if(empty($ip) === FALSE)
+        if( ! empty($ip) )
         {
             $post_data['remoteip'] = $ip;
         }elseif($ip === NULL)
@@ -252,9 +252,11 @@ class Recaptcha
             $post_data['remoteip'] = $this->_ci->input->ip_address();
         }
 
-        // If no response was set return
-        if(empty($post_data['response']) === TRUE){
-            return;
+        // If no response was set return fail
+        if( empty($post_data['response']) ){
+            return array(
+                'success' => FALSE,
+            );;
         }
 
         // Pass the secret key
@@ -301,7 +303,7 @@ class Recaptcha
             $return = json_decode($response, TRUE);
         }
 
-         // Close the cURL session
+        // Close the cURL session
         curl_close($curl);
 
         // Return data
