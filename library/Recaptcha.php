@@ -194,12 +194,12 @@ class Recaptcha
             }else{
                 // There is a class attribute passed
                 // Add g-recaptcha to the previous value
-                $attrib['class'] .= 'g-recaptcha';
+                $attr['class'] .= ' g-recaptcha';
             }
 
             // Loop through the attributes and add them to the box
-            foreach($attrib as $attr => $value){
-                $box .= ' '. $this->_escape($attr) .'="'. $this->_escape($value) .'"';
+            foreach($attr as $attrib => $value){
+                $box .= ' '. $this->_escape($attrib) .'="'. $this->_escape($value) .'"';
             }
         }
 
