@@ -163,7 +163,7 @@ class Recaptcha
      *
      * @return string
      */
-    public function create_box($attrib = NULL)
+    public function create_box($attr = NULL)
     {
         // Start creating the box
         $box = '<div';
@@ -182,24 +182,24 @@ class Recaptcha
         }
 
         // Check if there are attributes passed
-        if($attrib === NULL){
+        if($attr === NULL){
             // No attributes were passed add the g-recaptcha class
             $box .= ' class="g-recaptcha"';
         }else{
             // Attributes are passed, check if there is a class attribute
-            if( empty($attrib['class']) ){
+            if( empty($attr['class']) ){
                 // No class attribute was passed
                 // Add the g-recaptcha class
-                $attrib['class'] = 'g-recaptcha';
+                $attr['class'] = 'g-recaptcha';
             }else{
                 // There is a class attribute passed
                 // Add g-recaptcha to the previous value
-                $attrib['class'] .= ' g-recaptcha';
+                $attr['class'] .= ' g-recaptcha';
             }
 
             // Loop through the attributes and add them to the box
-            foreach($attrib as $attr => $value){
-                $box .= ' '. $this->_escape($attr) .'="'. $this->_escape($value) .'"';
+            foreach($attr as $attrib => $value){
+                $box .= ' '. $this->_escape($attrib) .'="'. $this->_escape($value) .'"';
             }
         }
 
@@ -231,7 +231,7 @@ class Recaptcha
      * 
      * @return array
      */
-    public function is_valid($response = NULL, $ip = NULL)
+    public function is_valid($response = NULL, $ip = FALSE)
     {
         // Prepare post data
         $post_data = array(
