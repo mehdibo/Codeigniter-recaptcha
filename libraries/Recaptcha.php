@@ -82,33 +82,28 @@ class Recaptcha
 	 *
 	 * @return void
 	 */
-	public function __construct($config = NULL)
+	public function __construct($options = NULL)
 	{
 		// Get CodeIgniter instance
 		$this->_ci =& get_instance();
 
-		// If a parameter was passed
-		if ($config !== NULL) {
-			// Check if keys were passed
-			if ( ! empty($config['site_key']) && ! empty($config['secret_key'])) {
-				// Set the keys
-				$this->set_keys($config['site_key'], $config['secret_key']);
-			}
+		// Load the config file
+		$this->_ci->config->load('recaptcha');
 
-			if ( ! empty($config['parameters'])) {
-				// Pass the parameters
-				$this->set_parameters($config['parameters']);
-			}
-		} else {
-			// Load the config file
-			$this->_ci->config->load('recaptcha');
+		// Get configs from the config file
+		$config = array(
+			'site_key'		=> $this->config->item('site_key', 're_keys'),
+			'secret_key'	=> $this->config->item('secret_key', 're_keys'),
+			'parameters'	=> $this->config->item('re_parameters')
+		);
 
-			// Set the keys
-			$this->set_keys($this->config->item('site_key', 're_keys'), $this->config->item('secret_key', 're_keys'));
+		// Merge options with the config
+		$config = array_merge($config, $options);
 
-			// Pass parameters
-			$this->set_parameters($this->config->item('re_parameters'));
-		}
+		// Set keys
+		$this->set_keys($config['site_key'], $config['secret_key']);
+		// Set parameters
+		$this->set_parameter($config['parameters']);
 
 		log_message('info', 'reCaptcha Class Initialized');
 	}
@@ -125,10 +120,12 @@ class Recaptcha
 	{
 		$this->_site_key = $site;
 		$this->_secret_key = $secret;
+
+		log_message('info', 'reCaptcha Class: Keys were set');
 	}
 
 	/**
-	 * Set a renderig parameter
+	 * Set a rendering parameter
 	 * Available parameters: https://developers.google.com/recaptcha/docs/display#render_param
 	 *
 	 * @param string $name  Parameter name
@@ -139,6 +136,8 @@ class Recaptcha
 	public function set_parameter($name, $value)
 	{
 		$this->_parameters[ $name ] = $value;
+
+		log_message('info', 'reCaptcha Class: Rendering parameter "'.$name.'" was set to "'.$value.'"');
 	}
 
 	/**
@@ -162,10 +161,25 @@ class Recaptcha
 	 * @param array $attr Array of attributes to add, 'attr' => 'value'
 	 *					Ex: 'id' => 'recaptcha-box'
 	 *
-	 * @return string reCAPTCHA's HTML code
+	 * @return string reCAPTCHA's HTML code or FALSE if no keys are set
 	 */
 	public function create_box($attr = NULL)
 	{
+		// Check if one of the keys is empty
+		if(empty($this->_site_key) || empty($this->_secret_key))
+		{
+			// If it's a development environment
+			if(ENVIRONMENT === 'development'){
+				show_error('Please set both the Site key and Secret key for the reCAPTCHA library.', 500, 'reCAPTCHA library: Missing keys');
+			}
+			else
+			{
+				log_message('error', 'reCaptcha Class: No keys are set');
+			}
+
+			return FALSE;
+		}
+
 		// Start creating the box
 		$box = '<div';
 
@@ -207,6 +221,8 @@ class Recaptcha
 		// Close the box
 		$box .= '></div>';
 
+		log_message('info', 'reCaptcha Class: Box was generated');
+
 		return $box;
 	}
 
@@ -222,6 +238,25 @@ class Recaptcha
 	 */
 	public function is_valid($response = NULL, $ip = FALSE)
 	{
+		// Check if one of the keys is empty
+		if(empty($this->_site_key) || empty($this->_secret_key))
+		{
+			// If it's a development environment
+			if(ENVIRONMENT === 'development'){
+				show_error('Please set both the Site key and Secret key for the reCAPTCHA library.', 500, 'reCAPTCHA library: Missing keys');
+			}
+			else
+			{
+				log_message('error', 'reCaptcha Class: No keys are set');
+			}
+
+			return array(
+				'success' => FALSE,
+			);
+		}
+
+		log_message('info', 'reCaptcha Class: Validating the response');
+
 		// Prepare post data
 		$post_data = array(
 			'response' => $response
