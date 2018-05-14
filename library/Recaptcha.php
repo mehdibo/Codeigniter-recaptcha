@@ -272,6 +272,10 @@ class Recaptcha
 		// Stop if an error occurs
 		curl_setopt($curl, CURLOPT_FAILONERROR, TRUE);
 
+		// Force CURL to verify the certificate
+		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, TRUE);
+		
+
 		// Initiate the request and return the response
 		$response = curl_exec($curl);
 
