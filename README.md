@@ -14,11 +14,14 @@ This library make it easy to use [Google's reCAPTCHA V2](https://developers.goog
 * [Contributing](#contributing)
 
 ## Getting Started
-1. Copy `libraries/Recaptcha.php` to `application/libraries` and `config/recaptcha.php` to `application/config`.
 
-2. Load the library using the Codeigniter loader `$this->load->library('recaptcha')`, 
+1. Download the [latest release](https://github.com/mehdibo/Codeigniter-recaptcha/releases).
 
-3. See the [documentation](#documentation) for usage.
+2. Copy `libraries/Recaptcha.php` to `application/libraries` and `config/recaptcha.php` to `application/config`.
+
+3. Load the library using the Codeigniter loader `$this->load->library('recaptcha')`, 
+
+4. See the [documentation](#documentation) for usage.
 
 ## Documentation
 
