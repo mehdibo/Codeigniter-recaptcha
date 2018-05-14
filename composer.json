@@ -1,0 +1,15 @@
+{
+    "name": "mehdibo/codeigniter-recaptcha",
+    "description": "CodeIgniter library to use Google's reCAPTCHA V2",
+    "type": "library",
+    "require": {
+        "php": ">=5.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mehdi Bounya",
+            "email": "contact.mehdi@pm.me"
+        }
+    ]
+}
