@@ -6,10 +6,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  * A library to implement Google reCAPTCHA V2
  * https://developers.google.com/recaptcha/intro
- * 
+ *
  * You can get the keys from here:
  * https://www.google.com/recaptcha/admin
- * 
+ *
  * In the "Choose the type of reCAPTCHA" choose "reCAPTCHA V2"
  *
  * @package Codeigniter-recaptcha
@@ -62,14 +62,14 @@ class Recaptcha
     /**
      * Render parameters for the reCAPTCHA
      * https://developers.google.com/recaptcha/docs/display#render_param
-     * 
+     *
      * *Set to NULL to not print out*
-     * 
+     *
      * Parameter            Options
      * theme                light|dark
      * type                 image|audio
      * size                 normal|compact
-     * 
+     *
      * @var array
      */
     private $_parameters = array(
@@ -95,7 +95,7 @@ class Recaptcha
     {
         // If a parameter was passed
         if ($config !== NULL) {
-             // Check if keys were passed
+            // Check if keys were passed
             if ( ! empty($config['site_key']) && ! empty($config['secret_key'])) {
                 // Set the keys
                 $this->set_keys($config['site_key'], $config['secret_key']);
@@ -107,7 +107,7 @@ class Recaptcha
             }
         }
 
-       
+
         // Get CodeIgniter instance
         $this->_ci =& get_instance();
 
@@ -119,7 +119,7 @@ class Recaptcha
      *
      * @param string $site   The reCAPTCHA site key
      * @param string $secret The reCAPTCHA secret key
-     * 
+     *
      * @return void
      */
     public function set_keys($site, $secret)
@@ -133,10 +133,10 @@ class Recaptcha
      *
      * @param string $name  Parameter name, a key from the $_config array
      * @param mixed  $value The value to set
-     * 
+     *
      * @return void
      */
-    public function set_parameter($name, $value) 
+    public function set_parameter($name, $value)
     {
         $this->_parameters[ $name ] = $value;
     }
@@ -145,7 +145,7 @@ class Recaptcha
      * Set multiple parameters
      *
      * @param array $array An array of parameters 'parameter_name' => 'value'
-     * 
+     *
      * @return void
      */
     public function set_parameters($array)
@@ -159,7 +159,7 @@ class Recaptcha
      * Gets the recaptcha's HTML code
      *
      * @param array $attr Array of attributes to add, 'attr' => 'value'
-     *                    Ex: 'id' => 'recaptcha-box' 
+     *                    Ex: 'id' => 'recaptcha-box'
      *
      * @return string
      */
@@ -204,7 +204,7 @@ class Recaptcha
         }
 
         // Close the box
-        $box .= '></div>';
+        $box .= '></div>'."\r\n". '<script src="https://www.google.com/recaptcha/api.js" async defer></script>'."\r\n";
 
         return $box;
     }
@@ -213,7 +213,7 @@ class Recaptcha
      * Escape data to be outputed as attributes
      *
      * @param string $data Data to be escaped
-     * 
+     *
      * @return string
      */
     private function _escape($data)
@@ -228,7 +228,7 @@ class Recaptcha
      * @param string $ip       User IP to send to Google
      *                         FALSE  To not send the IP
      *                         NULL   To get the IP automatically
-     * 
+     *
      * @return array
      */
     public function is_valid($response = NULL, $ip = FALSE)
@@ -242,7 +242,7 @@ class Recaptcha
         if ($response === NULL) {
             $post_data['response'] = $this->_ci->input->post('g-recaptcha-response');
         }
-        
+
         // If an IP was passed add it to post_data
         if( ! empty($ip) )
         {
