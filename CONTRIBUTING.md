@@ -12,10 +12,7 @@ This will require you to use the version control system called Git.
 
 ## Guidelines
 
-Before we look into how, here are the guidelines. If your Pull Requests fail
-to pass these guidelines it will be declined and you will need to re-submit
-when you’ve made the changes. This might sound a bit tough, but it is required
-for maintaining code quality.
+Here are the guidelines to follow when submitting a pull request.
 
 ### Documentation
 
@@ -24,3 +21,7 @@ If you change anything you need to update the PHPDoc block too.
 ### One issue at a time
 
 Please submit one fix per pull request, so that even if a fix is not desired, we can still benefit from the other fixes.
+
+### Branching
+
+All pull requests need to be sent to the "develop" branch.
