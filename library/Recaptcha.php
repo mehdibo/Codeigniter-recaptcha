@@ -13,7 +13,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * In the "Choose the type of reCAPTCHA" choose "reCAPTCHA V2"
  *
  * @package Codeigniter-recaptcha
- * @license GNU GENERAL PUBLIC LICENSE
+ * @license MIT License
  * @link    https://github.com/mehdibo/Codeigniter-blockchain
  */
 
@@ -26,7 +26,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @category   Libraries
  * @package	   CodeIgniter
  * @subpackage Libraries
- * @license    GNU GENERAL PUBLIC LICENSE
+ * @license    MIT License
  * @link       https://github.com/mehdibo/Codeigniter-blockchain
  */
 class Recaptcha
