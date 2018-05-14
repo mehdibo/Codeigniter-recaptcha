@@ -70,14 +70,7 @@ class Recaptcha
 	 * 
 	 * @var array
 	 */
-	private $_parameters = array(
-		'theme'			=> 'light',
-		'type'			 => 'image',
-		'size'			 => 'normal',
-		'tabindex'		 => 0,
-		'callback'		 => NULL,
-		'expired-callback' => NULL,
-	);
+	private $_parameters;
 
 	/**
 	 * __construct
@@ -91,6 +84,9 @@ class Recaptcha
 	 */
 	public function __construct($config = NULL)
 	{
+		// Get CodeIgniter instance
+		$this->_ci =& get_instance();
+
 		// If a parameter was passed
 		if ($config !== NULL) {
 			// Check if keys were passed
@@ -103,10 +99,16 @@ class Recaptcha
 				// Pass the parameters
 				$this->set_parameters($config['parameters']);
 			}
-		}
+		} else {
+			// Load the config file
+			$this->_ci->config->load('recaptcha');
 
-		// Get CodeIgniter instance
-		$this->_ci =& get_instance();
+			// Set the keys
+			$this->set_keys($this->config->item('site_key', 're_keys'), $this->config->item('secret_key', 're_keys'));
+
+			// Pass parameters
+			$this->set_parameters($this->config->item('re_parameters'));
+		}
 
 		log_message('info', 'reCaptcha Class Initialized');
 	}
