@@ -1,65 +1,104 @@
 # Codeigniter-recaptcha
- A library to implement Google reCAPTCHA V2
- 
- https://developers.google.com/recaptcha/intro
+This library make it easy to use [Google's reCAPTCHA V2](https://developers.google.com/recaptcha/intro)
+
 ## Contents
 
-  * [Getting Started](#getting-started)
-  * [Documentation](#documentation)
-  
- ## Getting Started
+* [Getting Started](#getting-started)
+* [Documentation](#documentation)
+  * [Getting the keys](#getting-the-keys)
+  * [Setting the keys](#setting-the-keys)
+  * [Loading the library](#loading-the-library)
+  * [Setting parameters](#setting-parameters)
+  * [Creating the reCAPTCHA box](#creating-the-recaptcha-box)
+  * [Validating the reCAPTCHA](#validating-the-recaptcha)
+* [Contributing](#contributing)
 
-To use this library you need a Site and a Secret key, You can get them from [here](https://www.google.com/recaptcha/admin).
+## Getting Started
+1. Copy `libraries/Recaptcha.php` to `application/libraries` and `config/recaptcha.php` to `application/config`.
 
-After you have got the keys:
+2. Load the library using the Codeigniter loader `$this->load->library('recaptcha')`, 
 
-  1. Copy `library/Recaptcha.php` to the `/application/libraries` folder.
-  2. Load the library using the Codeigniter loader `$this->load->library('recaptcha' , $config)`, 
-  3. See the [documentation](#documentation) for usage.
+3. See the [documentation](#documentation) for usage.
 
- ## Documentation
-  ### Loading the library
-Make sure you followed the steps on [Getting Started](#getting-started) first, after that you can simply load the library using:
-`$this->load->library('recaptcha' , $config)`
+## Documentation
 
-*optional* `$config` options are:
-  * `$config['site_key']` - Site key provided by Google
-  * `$config['secret_key']` - Secret key provided by Google
-  * `$config['parameters']` - An associative array of parameters and their value, `'parameter-name' => 'value'`
+### Getting the keys
+To use the reCAPTCHA you need a pair of keys (A secret and site keys), these can be obtained from Google by going to:
+https://www.google.com/recaptcha/admin
+
+And registering a new website, make sure you tick the "reCAPTCHA V2" option.
+
+### Setting the keys
+There are three ways to pass the keys to the library
   
-  ### Setting secret and site keys
-  You can either set the keys by passing the `$config` array to the CodeIgniter loader or by calling the `set_keys` method:
-  `$this->recaptcha->set_keys($site_key, $secret_key)`
-  
-  ### Setting parameters
-  You can set parameters by calling the `set_parameter` or `set_parameters` methods,list of available parameters is available here: https://developers.google.com/recaptcha/docs/display#render_param
-  
-  To set a parameter you can do it by calling:
-  
-  `$this->recaptcha->set_parameter('parameter-name', 'parameter-value')`
-  
-  Or by passing an array to `set_parameters`:
-  
-  `$this->recaptcha->set_parameters(array(
-  	'parameter-name' => 'parameter-value'
-  ))`
-  
-  ### Creating the reCAPTCHA box
-  To create the reCAPTCHA box's HTML code call the `create_box` method:
-  
-  `$this->recaptcha->create_box($attributes)`
-  
-  This method takes one optional parameter, an array of custom attributes, example:
-  
-  `$attributes = array(
-  	'class' => 're-box',
+**In the config file**
+
+You can set the keys by editing the `config/recaptcha.php` config file
+
+**Using the CodeIgniter loader**
+
+By passing an array of configs to the CodeIgniter loader, more details in the "[Loading the library](#loading-the-library)" section.
+
+**Using the `set_keys` method**
+
+You can pass the keys to the `set_keys` methods (after loading the library) like this:
+
+`
+$this->recaptcha->set_keys('site_key', 'secret_key');
+`
+
+### Loading the library
+You can load the library like any other library:
+`
+$this->load->library('recaptcha', $config);
+`
+
+The second argument `$config` is *optional*, It can have an array of configs to the library.
+
+`$config` options are:
+* `$config['site_key']` - Site key provided by Google
+* `$config['secret_key']` - Secret key provided by Google
+* `$config['parameters']` - An associative array of parameters and their value, `'parameter-name' => 'value'`, more details about parameters in the "[Setting parameters](#setting-parameters)" section.
+
+### Setting parameters
+You can set the parameters ([g-recaptcha tag attributes and grecaptcha.render parameters](https://developers.google.com/recaptcha/docs/display#render_param)) by using the `set_parameter` or `set_parameters` methods.
+
+To set a parameter you can do it by calling:
+`
+$this->recaptcha->set_parameter('parameter_name', 'value');
+`
+
+Or by passing an array to `set_parameters`:
+
+`
+$this->recaptcha->set_parameters($params);
+`
+
+Where `$params` is an associative array of `param_name => value`.
+
+When passing a parameter, omit the `data-` part, for example,
+If you want to set the `data-theme` parameter to `dark` you will do it like this:
+`
+$this->recaptcha->set_parameter('theme', 'dark');
+`
+
+### Creating the reCAPTCHA box
+To create the reCAPTCHA box's HTML code call the `create_box` method:
+
+`$this->recaptcha->create_box($attributes)`
+
+This method takes one optional parameter, an array of custom attributes, example:
+`
+$attributes = array(
+	'class' => 're-box',
 	'id' => 'an-id'
-  )
-  `
- 
-  ### Validate the reCaptcha
-  The `is_valid` method can be called to verify that the user passed the reCAPTCHA test.
-  `$this->recaptcha->is_valid($response, $ip)`
+)
+`
+
+### Validating the reCAPTCHA
+The `is_valid` method can be called to verify that the user passed the reCAPTCHA's puzzle.
+
+`$this->recaptcha->is_valid($response, $ip)`
   
   It returns an array:
 	
@@ -87,4 +126,4 @@ Make sure you followed the steps on [Getting Started](#getting-started) first, a
   Set to `NULL` to get the user's IP automatically
 
 ## Contributing 
-All contributions are welcome!
+All contributions are welcome! Just make sure you read [How to contribute](https://github.com/mehdibo/Codeigniter-recaptcha/blob/master/CONTRIBUTING.md)
