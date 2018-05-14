@@ -168,7 +168,7 @@ class Recaptcha
 		$box = '<div';
 
 		// Add the site key
-		$box .= ' data-sitekey="'. $this->_escape($this->_site_key) .'"';
+		$box .= ' data-sitekey="'. html_escape($this->_site_key) .'"';
 
 		// Add parameters
 		foreach ($this->_parameters as $parameter => $value){
@@ -176,7 +176,7 @@ class Recaptcha
 			if($value !== NULL)
 			{
 				// Add it to the box
-				$box .= ' data-'. $this->_escape($parameter) .'="'. $this->_escape($value) .'"';
+				$box .= ' data-'. html_escape($parameter) .'="'. html_escape($value) .'"';
 			}
 		}
 
@@ -198,7 +198,7 @@ class Recaptcha
 
 			// Loop through the attributes and add them to the box
 			foreach($attr as $attrib => $value){
-				$box .= ' '. $this->_escape($attrib) .'="'. $this->_escape($value) .'"';
+				$box .= ' '. html_escape($attrib) .'="'. html_escape($value) .'"';
 			}
 		}
 
@@ -206,18 +206,6 @@ class Recaptcha
 		$box .= '></div>';
 
 		return $box;
-	}
-
-	/**
-	 * Escape data to be outputed as attributes
-	 *
-	 * @param string $data Data to be escaped
-	 * 
-	 * @return string
-	 */
-	private function _escape($data)
-	{
-		return htmlspecialchars($data, ENT_QUOTES);
 	}
 
 	/**
