@@ -47,10 +47,8 @@ class Recaptcha
 
 	/**
 	 * API endpoint
-	 *
-	 * @var string
 	 */
-	private $_url = 'https://www.google.com/recaptcha/api/siteverify';
+	const API = 'https://www.google.com/recaptcha/api/siteverify';
 
 	/**
 	 * CI instance
@@ -65,8 +63,8 @@ class Recaptcha
 	 *
 	 * Parameter			Options
 	 * theme				light|dark
-	 * type				 image|audio
-	 * size				 normal|compact
+	 * type				 	image|audio
+	 * size				 	normal|compact
 	 * 
 	 * @var array
 	 */
@@ -295,7 +293,7 @@ class Recaptcha
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 
 		// Set the URL
-		curl_setopt($curl, CURLOPT_URL, $this->_url);
+		curl_setopt($curl, CURLOPT_URL, self::API);
 
 		// Set useragent
 		curl_setopt($curl, CURLOPT_USERAGENT, 'CodeIgniter');
