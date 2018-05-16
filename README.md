@@ -1,5 +1,5 @@
 # Codeigniter-recaptcha
-This library make it easy to use [Google's reCAPTCHA V2](https://developers.google.com/recaptcha/intro)
+This library makes it easy to use [Google's reCAPTCHA V2](https://developers.google.com/recaptcha/intro)
 
 ## Contents
 
@@ -90,13 +90,16 @@ To create the reCAPTCHA box's HTML code call the `create_box` method:
 
 `$this->recaptcha->create_box($attributes)`
 
-This method takes one optional parameter, an array of custom attributes, example:
+This method takes one optional parameter, an array of custom attributes, for example:
 `
 $attributes = array(
-	'class' => 're-box',
-	'id' => 'an-id'
+    'class' => 're-box',
+    'id' => 'an-id'
 )
 `
+
+**Notice:** You need to have the reCAPTCHA JS code included in your code:
+`<script src='https://www.google.com/recaptcha/api.js'></script>`
 
 ### Validating the reCAPTCHA
 The `is_valid` method can be called to verify that the user passed the reCAPTCHA's puzzle.
@@ -104,19 +107,19 @@ The `is_valid` method can be called to verify that the user passed the reCAPTCHA
 `$this->recaptcha->is_valid($response, $ip)`
   
   It returns an array:
-	
-	'success' => TRUE if the recaptcha was passed,
-	
-	'error' => TRUE if there was an error connecting to the server,
-	
-	'error_message' => If error is true, this contains the message returned by curl,
-	
-	'challenge_ts' =>  timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
-	
-	'hostname' => the hostname of the site where the reCAPTCHA was solved
-	
-	'error-codes' => error codes returned by Google if there are any
-	
+    
+    'success' => TRUE if the recaptcha was passed,
+    
+    'error' => TRUE if there was an error connecting to the server,
+    
+    'error_message' => If error is true, this contains the message returned by curl,
+    
+    'challenge_ts' =>  timestamp of the challenge load (ISO format yyyy-MM-dd'T'HH:mm:ssZZ)
+    
+    'hostname' => the hostname of the site where the reCAPTCHA was solved
+    
+    'error-codes' => error codes returned by Google if there are any
+    
   
   this method takes two optional parameters:
   
