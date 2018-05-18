@@ -18,5 +18,8 @@
 	],
     "require": {
         "php": ">=5.6"
-    }
+	},
+	"autoload": {
+        "classmap": ["libraries/Recaptcha.php"]
+	}
 }
