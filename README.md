@@ -27,6 +27,19 @@ composer require mehdibo/codeigniter-recaptcha
 
 Copy the content of [`config/recaptcha.php`](/config/recaptcha.php) to your `application/config/recaptcha.php`
 
+**First time using composer**
+Open a terminal (commands in windows), the commands here are for linux but you can find the equivalent in windows.
+
+1. First thing you should do is [install composer](https://getcomposer.org/doc/00-intro.md)
+
+2. Go to your application folder: `cd application`
+
+3. Install the library: `composer require mehdibo/codeigniter-recaptcha`
+
+4. Go to `application/config/config.php` and set `composer_autoload` to `TRUE`
+
+5. That's it! check the [Documentation](#documentation) for more details.
+
 ### Manually
 
 1. Download the [latest release](https://github.com/mehdibo/Codeigniter-recaptcha/releases).
@@ -66,11 +79,21 @@ $this->recaptcha->set_keys('site_key', 'secret_key');
 
 ### Loading the library
 You can load the library like any other library:
-`
+```php
 $this->load->library('recaptcha', $config);
-`
+```
 
-The second argument `$config` is *optional*, It can have an array of configs to the library.
+Or if installed via composer:
+```php
+$recaptcha = new Recaptcha($config);
+```
+And you can access the methods like this:
+```php
+$recaptcha->method_name();
+```
+
+
+The `$config` argument is *optional*, It can have an array of configs to the library.
 
 `$config` options are:
 * `$config['site_key']` - Site key provided by Google
