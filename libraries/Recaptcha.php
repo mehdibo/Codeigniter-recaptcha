@@ -86,7 +86,7 @@ class Recaptcha
 		$this->_ci =& get_instance();
 
 		// Load the config file
-		$this->_ci->config->load('recaptcha');
+		$this->_ci->config->load('recaptcha', FALSE, TRUE);
 
 		// Get configs from the config file
 		$config = array(
@@ -95,13 +95,18 @@ class Recaptcha
 			'parameters'	=> $this->_ci->config->item('re_parameters')
 		);
 
-		// Merge options with the config
-		$config = array_merge($config, $options);
+		if(is_array($options)){
+			// Merge options with the config
+			$config = array_merge($config, $options);
+		}
 
 		// Set keys
 		$this->set_keys($config['site_key'], $config['secret_key']);
-		// Set parameters
-		$this->set_parameters($config['parameters']);
+
+		if(!empty($config['parameters'])){
+			// Set parameters
+			$this->set_parameters($config['parameters']);
+		}
 
 		log_message('info', 'reCaptcha Class Initialized');
 	}
