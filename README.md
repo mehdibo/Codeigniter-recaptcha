@@ -25,9 +25,10 @@ If you have composer installed you can run
 composer require mehdibo/codeigniter-recaptcha
 ```
 
-Copy the content of [`config/recaptcha.php`](/config/recaptcha.php) to your `application/config/recaptcha.php`
+Copy the content of [`config/recaptcha.php`](/config/recaptcha.php) to `application/config/recaptcha.php`
 
 **First time using composer**
+
 Open a terminal (commands in windows), the commands here are for linux but you can find the equivalent in windows.
 
 1. First thing you should do is [install composer](https://getcomposer.org/doc/00-intro.md)
@@ -36,9 +37,11 @@ Open a terminal (commands in windows), the commands here are for linux but you c
 
 3. Install the library: `composer require mehdibo/codeigniter-recaptcha`
 
-4. Go to `application/config/config.php` and set `composer_autoload` to `TRUE`
+4. Copy the content of [`config/recaptcha.php`](/config/recaptcha.php) to your `application/config/recaptcha.php`
 
-5. That's it! check the [Documentation](#documentation) for more details.
+5. Go to `application/config/config.php` and set `composer_autoload` to `TRUE`
+
+6. That's it! check the [Documentation](#documentation) for more details.
 
 ### Manually
 
