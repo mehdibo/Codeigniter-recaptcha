@@ -1,0 +1,25 @@
+{
+    "name": "mehdibo/codeigniter-recaptcha",
+	"description": "CodeIgniter library to use Google's reCAPTCHA V2",
+	"type": "library",
+	"keywords": [
+		"codeigniter",
+		"recaptcha"
+	],
+	"homepage": "https://github.com/mehdibo/Codeigniter-recaptcha",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mehdi Bounya",
+			"email": "contact.mehdi@pm.me",
+			"role": "Developer",
+			"homepage": "https://twitter.com/mehdibounya"
+		}
+	],
+    "require": {
+        "php": ">=5.6"
+	},
+	"autoload": {
+        "classmap": ["libraries/Recaptcha.php"]
+	}
+}

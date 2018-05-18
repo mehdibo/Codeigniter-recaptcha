@@ -47,10 +47,8 @@ class Recaptcha
 
 	/**
 	 * API endpoint
-	 *
-	 * @var string
 	 */
-	private $_url = 'https://www.google.com/recaptcha/api/siteverify';
+	const API = 'https://www.google.com/recaptcha/api/siteverify';
 
 	/**
 	 * CI instance
@@ -65,8 +63,8 @@ class Recaptcha
 	 *
 	 * Parameter			Options
 	 * theme				light|dark
-	 * type				 image|audio
-	 * size				 normal|compact
+	 * type				 	image|audio
+	 * size				 	normal|compact
 	 * 
 	 * @var array
 	 */
@@ -88,7 +86,7 @@ class Recaptcha
 		$this->_ci =& get_instance();
 
 		// Load the config file
-		$this->_ci->config->load('recaptcha');
+		$this->_ci->config->load('recaptcha', FALSE, TRUE);
 
 		// Get configs from the config file
 		$config = array(
@@ -97,13 +95,18 @@ class Recaptcha
 			'parameters'	=> $this->_ci->config->item('re_parameters')
 		);
 
-		// Merge options with the config
-		$config = array_merge($config, $options);
+		if(is_array($options)){
+			// Merge options with the config
+			$config = array_merge($config, $options);
+		}
 
 		// Set keys
 		$this->set_keys($config['site_key'], $config['secret_key']);
-		// Set parameters
-		$this->set_parameters($config['parameters']);
+
+		if(!empty($config['parameters'])){
+			// Set parameters
+			$this->set_parameters($config['parameters']);
+		}
 
 		log_message('info', 'reCaptcha Class Initialized');
 	}
@@ -295,7 +298,7 @@ class Recaptcha
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
 
 		// Set the URL
-		curl_setopt($curl, CURLOPT_URL, $this->_url);
+		curl_setopt($curl, CURLOPT_URL, self::API);
 
 		// Set useragent
 		curl_setopt($curl, CURLOPT_USERAGENT, 'CodeIgniter');
