@@ -4,6 +4,8 @@ This library makes it easy to use [Google's reCAPTCHA V2](https://developers.goo
 ## Contents
 
 * [Installation](#installation)
+  * [Via composer](#via-composer)
+  * [Manually](#manually)
 * [Documentation](#documentation)
   * [Getting the keys](#getting-the-keys)
   * [Setting the keys](#setting-the-keys)
@@ -23,11 +25,11 @@ If you have composer installed you can run
 composer require mehdibo/codeigniter-recaptcha
 ```
 
-Copy the content of [`config/recaptcha.php`](/blob/develop/config/recaptcha.php) to your `application/config/recaptcha.php` file.
+Copy the content of [`config/recaptcha.php`](/config/recaptcha.php) to your `application/config/recaptcha.php`
 
 ### Manually
 
-1. Download the [latest release](/releases).
+1. Download the [latest release](https://github.com/mehdibo/Codeigniter-recaptcha/releases).
 
 2. Copy `libraries/Recaptcha.php` to `application/libraries` and `config/recaptcha.php` to `application/config`.
 
@@ -202,28 +204,6 @@ class Form extends CI_Controller {
 	}
 ```
 
-**The view**
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-	<title>CodeIgniter reCAPTCHA</title>
-	<!-- reCAPTCHA JavaScript API -->
-	<script src='https://www.google.com/recaptcha/api.js'></script>
-</head>
-
-<body>
-	<form action="/path/to/controller">
-		<?=$recaptcha?>
-		<button type="submit" name="action" value="submit">Submit</button>
-	</form>
-</body>
-
-</html>
-```
-
-
 ### Installed manually
 
 **The Controller**
@@ -272,6 +252,7 @@ class Form extends CI_Controller {
 		$this->load->view('form', ['recaptcha' => $recaptcha]);
 	}
 ```
+---
 
 **The view**
 
