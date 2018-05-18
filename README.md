@@ -3,7 +3,7 @@ This library makes it easy to use [Google's reCAPTCHA V2](https://developers.goo
 
 ## Contents
 
-* [Getting Started](#getting-started)
+* [Installation](#installation)
 * [Documentation](#documentation)
   * [Getting the keys](#getting-the-keys)
   * [Setting the keys](#setting-the-keys)
@@ -14,13 +14,24 @@ This library makes it easy to use [Google's reCAPTCHA V2](https://developers.goo
 * [Example](#example)
 * [Contributing](#contributing)
 
-## Getting Started
+## Installation
 
-1. Download the [latest release](https://github.com/mehdibo/Codeigniter-recaptcha/releases).
+### Via composer
+If you have composer installed you can run
+
+```batch
+composer require mehdibo/codeigniter-recaptcha
+```
+
+Copy the content of [`config/recaptcha.php`](/blob/develop/config/recaptcha.php) to your `application/config/recaptcha.php` file.
+
+### Manually
+
+1. Download the [latest release](/releases).
 
 2. Copy `libraries/Recaptcha.php` to `application/libraries` and `config/recaptcha.php` to `application/config`.
 
-3. Load the library using the Codeigniter loader `$this->load->library('recaptcha')`, 
+3. Load the library using the Codeigniter loader `$this->load->library('recaptcha')`, check the [example](#example).
 
 4. See the [documentation](#documentation) for usage.
 
@@ -141,6 +152,79 @@ And it returns an array:
 
 ## Example
 Here is a quick example to use the **Codeigniter-recaptcha** library.
+
+### Installed via composer
+
+**The Controller**
+```php
+<?php
+
+class Form extends CI_Controller {
+
+	public function index()
+	{
+		/*
+		 Load the reCAPTCHA library.
+		 You can pass the keys here by passing an array to the class.
+		 Check the "Setting the keys" section for more details
+		*/
+		$recaptcha = new Recaptcha();
+
+		/*
+		 Create the reCAPTCHA box.
+		 You can pass an array of attributes to this method.
+		 Check the "Creating the reCAPTCHA box" section for more details
+		*/
+		$box = $recaptcha->create_box();
+
+		// Check if the form is submitted
+		if($this->input->post('action') === 'submit')
+		{
+			/*
+			 Check if the reCAPTCHA was solved
+			 You can pass arguments to the `is_valid` method,
+			 but it should work fine without any.
+			 Check the "Validating the reCAPTCHA" section for more details
+			*/
+			$is_valid =$recaptcha->is_valid();
+
+			if($is_valid['success'])
+			{
+				echo "reCAPTCHA solved";
+			}
+			else
+			{
+				echo "reCAPTCHA not solved/an error occured";
+			}
+		}
+
+		$this->load->view('form', ['recaptcha' => $box]);
+	}
+```
+
+**The view**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CodeIgniter reCAPTCHA</title>
+	<!-- reCAPTCHA JavaScript API -->
+	<script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+	<form action="/path/to/controller">
+		<?=$recaptcha?>
+		<button type="submit" name="action" value="submit">Submit</button>
+	</form>
+</body>
+
+</html>
+```
+
+
+### Installed manually
 
 **The Controller**
 ```php
