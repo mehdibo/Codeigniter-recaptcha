@@ -11,6 +11,7 @@ This library makes it easy to use [Google's reCAPTCHA V2](https://developers.goo
   * [Setting parameters](#setting-parameters)
   * [Creating the reCAPTCHA box](#creating-the-recaptcha-box)
   * [Validating the reCAPTCHA](#validating-the-recaptcha)
+* [Example](#example)
 * [Contributing](#contributing)
 
 ## Getting Started
