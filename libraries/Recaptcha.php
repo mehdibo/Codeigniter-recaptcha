@@ -189,13 +189,17 @@ class Recaptcha
 		// Add the site key
 		$box .= ' data-sitekey="'. html_escape($this->_site_key) .'"';
 
-		// Add parameters
-		foreach ($this->_parameters as $parameter => $value){
-			// Check if the value is not NULL
-			if($value !== NULL)
-			{
-				// Add it to the box
-				$box .= ' data-'. html_escape($parameter) .'="'. html_escape($value) .'"';
+		// Check if parameters is available
+		if (!empty($this->_parameters) )
+		{
+			// Add parameters
+			foreach ($this->_parameters as $parameter => $value){
+				// Check if the value is not NULL
+				if($value !== NULL)
+				{
+					// Add it to the box
+					$box .= ' data-'. html_escape($parameter) .'="'. html_escape($value) .'"';
+				}
 			}
 		}
 
