@@ -21,7 +21,7 @@ This library makes it easy to use [Google's reCAPTCHA V2](https://developers.goo
 ### Via composer
 If you have composer installed you can run
 
-```batch
+```sh
 composer require mehdibo/codeigniter-recaptcha
 ```
 
